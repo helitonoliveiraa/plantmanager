@@ -1,26 +1,41 @@
-import { StyleSheet } from 'react-native';
-import theme from '../../styles/theme.style';
+import { StyleSheet, Dimensions } from 'react-native';
+import theme from '../../styles/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingTop: 20,
   },
   title: {
-    fontSize: theme['font-size'].FONT_SIZE_LARGE,
+    fontSize: theme.size.FONT_SIZE_LARGE,
     color: theme.colors.GRAY_DARK,
     textAlign: 'center',
-    fontFamily: theme['font-family'].Jost_600SemiBold,
+    fontFamily: theme.fonts.SEMIBOLD,
   },
-  logo: {},
+  logo: {
+    height: Dimensions.get('window').width * 0.7,
+  },
   description: {
-    fontSize: theme['font-size'].FONT_SIZE_NORMAL,
-    fontFamily: theme['font-family'].Jost_400Regular,
+    fontSize: theme.size.FONT_SIZE_NORMAL,
+    fontFamily: theme.fonts.REGULAR,
     color: theme.colors.GRAY_MEDIUM,
     textAlign: 'center',
+  },
+  button: {
+    width: 56,
+    height: 56,
+    borderRadius: 16,
+    backgroundColor: theme.colors.GRENN,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  buttonIcon: {
+    fontSize: 20,
+    color: theme.colors.WHITE,
   },
 });

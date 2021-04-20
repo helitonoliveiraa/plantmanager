@@ -1,5 +1,7 @@
+import 'react-native-gesture-handler';
 import React from 'react';
-import { Text, StatusBar, SafeAreaView } from 'react-native';
+import { StatusBar, SafeAreaView } from 'react-native';
+import AppLoading from 'expo-app-loading';
 import {
   useFonts,
   Jost_400Regular,
@@ -7,9 +9,9 @@ import {
   Jost_600SemiBold,
 } from '@expo-google-fonts/jost';
 
-import { Welcome } from './src/pages/Welcome';
+import Routes from './src/routes';
 
-import theme from './src/styles/theme.style';
+import theme from './src/styles/theme';
 
 export default function App(): JSX.Element {
   const [fontsLoaded] = useFonts({
@@ -19,13 +21,22 @@ export default function App(): JSX.Element {
   });
 
   if (!fontsLoaded) {
-    return <Text>Loaging...</Text>;
+    return <AppLoading />;
   }
 
   return (
-    <SafeAreaView style={{ backgroundColor: theme.colors.WHITE }}>
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" />
-      <Welcome />
+    <SafeAreaView
+      style={{
+        backgroundColor: theme.colors.WHITE,
+        flex: 1,
+      }}
+    >
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent
+      />
+      <Routes />
     </SafeAreaView>
   );
 }

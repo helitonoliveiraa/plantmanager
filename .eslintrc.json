@@ -43,6 +43,8 @@
     "react/style-prop-object": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off",
+    "arrow-parens":"off",
     "camelcase":"off",
     "no-undef":"off",
     "import/extensions": [
