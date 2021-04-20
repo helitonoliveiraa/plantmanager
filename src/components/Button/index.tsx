@@ -1,27 +1,17 @@
 import React from 'react';
+import { Text } from 'react-native';
 import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
-import { MaterialIcons as Icon } from '@expo/vector-icons';
 
 import { styles } from './styles';
 
 interface ButtonProps extends RectButtonProps {
-  title?: string;
-  iconName?: string;
-  iconSize?: number;
-  iconColor?: string;
+  text: string;
 }
 
-export function Button({
-  title,
-  iconName,
-  iconSize,
-  iconColor,
-  ...rest
-}: ButtonProps): JSX.Element {
+export function Button({ text, ...rest }: ButtonProps): JSX.Element {
   return (
     <RectButton style={styles.button} {...rest}>
-      {title && title}
-      {iconName && <Icon name={iconName} size={iconSize} color={iconColor} />}
+      <Text style={styles.text}>{text}</Text>
     </RectButton>
   );
 }
