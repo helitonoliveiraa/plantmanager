@@ -8,6 +8,7 @@ export default {
   },
 
   fonts: {
+    LIGHT: 'Jost_300Light',
     REGULAR: 'Jost_400Regular',
     MEDIUM: 'Jost_500Medium',
     SEMIBOLD: 'Jost_600SemiBold',

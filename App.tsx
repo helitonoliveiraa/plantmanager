@@ -4,6 +4,7 @@ import { StatusBar, SafeAreaView } from 'react-native';
 import AppLoading from 'expo-app-loading';
 import {
   useFonts,
+  Jost_300Light,
   Jost_400Regular,
   Jost_500Medium,
   Jost_600SemiBold,
@@ -15,6 +16,7 @@ import theme from './src/styles/theme';
 
 export default function App(): JSX.Element {
   const [fontsLoaded] = useFonts({
+    Jost_300Light,
     Jost_400Regular,
     Jost_500Medium,
     Jost_600SemiBold,

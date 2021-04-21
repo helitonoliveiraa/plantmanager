@@ -9,6 +9,7 @@ import {
 import { Welcome } from '../pages/Welcome';
 import { UserIdentification } from '../pages/UserIdentification';
 import { Confirmation } from '../pages/Confirmation';
+import { PlantSelect } from '../pages/PlantSelect';
 
 import theme from '../styles/theme';
 
@@ -57,6 +58,8 @@ export default function AppRoutes(): JSX.Element {
       <Stack.Screen name="UserIdentification" component={UserIdentification} />
 
       <Stack.Screen name="Confirmation" component={Confirmation} />
+
+      <Stack.Screen name="PlantSelect" component={PlantSelect} />
     </Stack.Navigator>
   );
 }

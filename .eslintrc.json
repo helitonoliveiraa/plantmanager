@@ -44,6 +44,8 @@
     "react/jsx-one-expression-per-line": "off",
     "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "implicit-arrow-linebreak":"off",
     "arrow-parens":"off",
     "camelcase":"off",
     "no-undef":"off",
