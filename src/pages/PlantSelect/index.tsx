@@ -45,7 +45,7 @@ export function PlantSelect(): JSX.Element {
 
   const [page, setPage] = useState(1);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [loadedAll, setLoadedAll] = useState(false);
+  // const [loadedAll, setLoadedAll] = useState(false);
 
   async function loadPlants() {
     const response = await api.get(
@@ -85,7 +85,7 @@ export function PlantSelect(): JSX.Element {
     }
 
     const filtered = plants.filter(plant =>
-      plant.environments.includes(environmentKey),);
+      plant.environments.includes(environmentKey));
 
     setFilteredPlants(filtered);
   }
@@ -132,6 +132,7 @@ export function PlantSelect(): JSX.Element {
           horizontal
           showsHorizontalScrollIndicator={false}
           data={environments}
+          keyExtractor={item => item.key}
           renderItem={({ item }) => (
             <EnvironmentButton
               key={item.key}
@@ -147,6 +148,7 @@ export function PlantSelect(): JSX.Element {
         <FlatList
           contentContainerStyle={styles.plantsContent}
           data={filteredPlants}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item: plant }) => (
             <PlantCardPrimary key={plant.id} data={plant} />
           )}
