@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   SafeAreaView,
   Text,
@@ -9,7 +10,8 @@ import {
   Platform,
   TouchableWithoutFeedback,
   Keyboard,
-  Animated,
+  Alert,
+  // Animated,
 } from 'react-native';
 import { Button } from '../../components/Button';
 
@@ -19,7 +21,8 @@ import { styles } from './styles';
 export function UserIdentification(): JSX.Element {
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
-  const [name, setName] = useState<string>();
+  const [isErrored, setIsErrored] = useState(false);
+  const [name, setName] = useState<string>('');
 
   const navigation = useNavigation();
 
@@ -31,8 +34,22 @@ export function UserIdentification(): JSX.Element {
   //   delay: 500,
   // }).start();
 
-  function handleSubmit() {
-    navigation.navigate('Confirmation');
+  async function handleSubmit() {
+    if (!name) {
+      setIsErrored(true);
+      Alert.alert('Me diz como chamar você!');
+      return;
+    }
+
+    if (name.length > 30) return;
+
+    try {
+      await AsyncStorage.setItem('@plantmanager:username', name);
+      navigation.navigate('Confirmation');
+      setName('');
+    } catch {
+      Alert.alert('Falha ao salvar os dados!', 'Tente novamente!');
+    }
   }
 
   function handleInputBlur() {
@@ -42,6 +59,7 @@ export function UserIdentification(): JSX.Element {
 
   function handleInputFocus() {
     setIsFocused(true);
+    setIsErrored(false);
   }
 
   function handleInputChange(value: string) {
@@ -73,11 +91,13 @@ export function UserIdentification(): JSX.Element {
                   (isFocused || isFilled) && {
                     borderColor: theme.colors.GRENN,
                   },
+                  isErrored && { borderColor: theme.colors.RED },
                 ]}
                 placeholder="Digite um nome"
                 placeholderTextColor={theme.colors.GRAY}
                 onBlur={handleInputBlur}
                 onFocus={handleInputFocus}
+                value={name}
                 onChangeText={handleInputChange}
               />
 
