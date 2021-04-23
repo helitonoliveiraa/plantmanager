@@ -10,14 +10,12 @@ export function Header(): JSX.Element {
 
   const routes = useRoute();
 
-  console.log(routes.name);
-
   const [name] = userName.split(' ');
 
   let salutation = 'Olá,';
   let nameOrPlant = name;
 
-  if (routes.name === 'MyPlants') {
+  if (routes.name === 'Minhas Plantas') {
     salutation = 'Minhas';
     nameOrPlant = 'Plantinhas';
   }
