@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, Alert } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { styles } from './styles';
@@ -7,8 +8,19 @@ import { styles } from './styles';
 export function Header(): JSX.Element {
   const [userName, setUserName] = useState<string>('');
 
+  const routes = useRoute();
+
+  console.log(routes.name);
+
   const [name] = userName.split(' ');
 
+  let salutation = 'Olá,';
+  let nameOrPlant = name;
+
+  if (routes.name === 'MyPlants') {
+    salutation = 'Minhas';
+    nameOrPlant = 'Plantinhas';
+  }
   useEffect(() => {
     async function loadUserData() {
       try {
@@ -29,8 +41,8 @@ export function Header(): JSX.Element {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.title}>Olá,</Text>
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.title}>{salutation}</Text>
+        <Text style={styles.name}>{nameOrPlant}</Text>
       </View>
 
       <Image
