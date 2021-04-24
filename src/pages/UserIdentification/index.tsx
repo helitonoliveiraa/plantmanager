@@ -13,7 +13,9 @@ import {
   Alert,
   // Animated,
 } from 'react-native';
+
 import { Button } from '../../components/Button';
+import { ConfirmationParams } from '../../types';
 
 import theme from '../../styles/theme';
 import { styles } from './styles';
@@ -45,7 +47,14 @@ export function UserIdentification(): JSX.Element {
 
     try {
       await AsyncStorage.setItem('@plantmanager:username', name);
-      navigation.navigate('Confirmation');
+      navigation.navigate('Confirmation', {
+        title: 'Prontiho',
+        subtitle:
+          ' Agora vamos começar a cuidar das suas plantinhas com muito cuidado.',
+        buttonTitle: 'Começar',
+        icon: 'smile',
+        nextScreen: 'PlantSelect',
+      } as ConfirmationParams);
       setName('');
     } catch {
       Alert.alert('Falha ao salvar os dados!', 'Tente novamente!');

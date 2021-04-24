@@ -5,7 +5,7 @@ import theme from '../../styles/theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
+    paddingTop: 30,
   },
   header: {
     paddingHorizontal: 20,
@@ -24,8 +24,7 @@ export const styles = StyleSheet.create({
     lineHeight: 23,
   },
   environmentList: {
-    marginTop: 24,
-    marginBottom: 40,
+    marginVertical: 24,
     paddingHorizontal: 20,
   },
   plants: {
