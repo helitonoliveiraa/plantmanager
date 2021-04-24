@@ -24,5 +24,10 @@ export default {
     GRENN_LIGHT: '#DAF2E4',
     GRENN: '#32B768',
     GRENN_DARK: '#2B7A4B',
+
+    BLUE_LIGHT: '#E6F1FA',
+    BLUE_MEDIUM: '#3D7199',
+
+    RED: '#E83F5B',
   },
 };
