@@ -49,6 +49,7 @@
     "import/no-duplicates": "off",
     "object-curly-newline": "off",
     "react/prop-types": "off",
+    "import/no-unresolved": "off",
     "arrow-parens":"off",
     "camelcase":"off",
     "no-undef":"off",
