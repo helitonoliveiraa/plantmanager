@@ -47,6 +47,7 @@
     "@typescript-eslint/no-use-before-define": "off",
     "implicit-arrow-linebreak":"off",
     "import/no-duplicates": "off",
+    "object-curly-newline": "off",
     "react/prop-types": "off",
     "arrow-parens":"off",
     "camelcase":"off",

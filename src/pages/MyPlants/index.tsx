@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+// eslint-disable-next-line object-curly-newline
 import { View, Text, Image, FlatList, Alert } from 'react-native';
 import { formatDistance } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Header } from '../../components/Header';
 import { PlantCardSecondary } from '../../components/PlantCardSecondary';
+import { CustomModal } from '../../components/Modal';
 
-import { PlantProps, StoragePlantProps } from '../../types';
+import { PlantProps } from '../../types';
 import { loadPlant, removePlant } from '../../libs/storage';
 
 import waterdropImg from '../../assets/waterdrop.png';
@@ -18,6 +19,11 @@ export function MyPlants(): JSX.Element {
   const [plants, setPlants] = useState<PlantProps[]>([]);
   const [loading, setLoading] = useState(true);
   const [nextWaterd, setNextWatered] = useState<string>();
+
+  const [show, setShow] = useState(false);
+  const [willRemovePlant, setWillRemovePlant] = useState<PlantProps>(
+    {} as PlantProps,
+  );
 
   useEffect(() => {
     async function loadStorageData() {
@@ -41,26 +47,26 @@ export function MyPlants(): JSX.Element {
   }, []);
 
   function handleRemove(plant: PlantProps) {
-    Alert.alert('Remover', `Deseja remover a ${plant.name}?`, [
-      {
-        text: 'Não',
-        style: 'cancel',
-      },
-      {
-        text: 'Sim',
-        onPress: async () => {
-          try {
-            await removePlant(plant.id);
+    setShow(true);
+    setWillRemovePlant(plant);
+  }
 
-            setPlants(prevState => prevState.filter(p => p.id !== plant.id));
+  async function handleDelete() {
+    try {
+      await removePlant(willRemovePlant.id);
 
-            // console.log(data);
-          } catch (err) {
-            Alert.alert('Ops!', 'Não foi possível remover essa plantinha.');
-          }
-        },
-      },
-    ]);
+      setPlants(prevState =>
+        // eslint-disable-next-line prettier/prettier
+        prevState.filter(p => p.id !== willRemovePlant.id));
+
+      setShow(false);
+    } catch (err) {
+      Alert.alert('Ops!', 'Não foi possível remover essa plantinha.');
+    }
+  }
+
+  function handleCloseModal() {
+    setShow(false);
   }
 
   if (loading) {
@@ -90,9 +96,17 @@ export function MyPlants(): JSX.Element {
             />
           )}
           showsVerticalScrollIndicator={false}
-          // contentContainerStyle={{ flex: 1 }}
         />
       </View>
+
+      {show && (
+        <CustomModal
+          isOpen={show}
+          plant={willRemovePlant}
+          handleCloseModal={handleCloseModal}
+          handleDelete={handleDelete}
+        />
+      )}
     </View>
   );
 }
