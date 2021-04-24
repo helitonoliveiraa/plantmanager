@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 16,
     paddingVertical: 20,
-    // paddingLeft: 26,
     marginBottom: 16,
     backgroundColor: theme.colors.LIGHT_GRAY,
     flexDirection: 'row',
@@ -56,7 +55,7 @@ export const styles = StyleSheet.create({
     paddingRight: 28,
   },
   buttonRemoveicon: {
-    fontSize: 32,
+    fontSize: 28,
     color: theme.colors.WHITE,
   },
 });
