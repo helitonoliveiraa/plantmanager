@@ -17,6 +17,7 @@ import { isBefore, format } from 'date-fns';
 
 import { savePlant } from '../../libs/storage';
 import { PlantProps, ConfirmationParams } from '../../types';
+import { useAlert } from '../../contexts/AlertContext';
 
 import waterdropImg from '../../assets/waterdrop.png';
 import { Button } from '../../components/Button';
@@ -31,6 +32,7 @@ export function PlantSave(): JSX.Element {
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(Platform.OS === 'ios');
 
+  const { alertNotification } = useAlert();
   const navigation = useNavigation();
   const route = useRoute();
   const { plant } = route.params as Plant;
@@ -43,7 +45,11 @@ export function PlantSave(): JSX.Element {
     if (dateTime && isBefore(dateTime, new Date())) {
       setSelectedDateTime(new Date());
 
-      Alert.alert('Ops! ⏰', 'Escolha uma data no futuro 👀');
+      alertNotification({
+        title: 'Ops! ⏰',
+        message: 'Escolha uma data no futuro 👀',
+      });
+
       return;
     }
 
@@ -72,7 +78,10 @@ export function PlantSave(): JSX.Element {
         nextScreen: 'MyPlants',
       } as ConfirmationParams);
     } catch {
-      Alert.alert('Ohhh nooo!', 'Não foi possível salvar. 😔');
+      alertNotification({
+        title: 'Ohhh nooo!',
+        message: 'Não foi possível salvar. 😔',
+      });
     }
   }
 

@@ -52,6 +52,7 @@
     "import/no-unresolved": "off",
     "arrow-parens":"off",
     "camelcase":"off",
+    "no-unused-vars": "off",
     "no-undef":"off",
     "import/extensions": [
       "error",

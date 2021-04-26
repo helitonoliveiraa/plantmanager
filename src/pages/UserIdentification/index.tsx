@@ -14,6 +14,7 @@ import {
   // Animated,
 } from 'react-native';
 
+import { useAlert } from '../../contexts/AlertContext';
 import { Button } from '../../components/Button';
 import { ConfirmationParams } from '../../types';
 
@@ -27,19 +28,14 @@ export function UserIdentification(): JSX.Element {
   const [name, setName] = useState<string>('');
 
   const navigation = useNavigation();
-
-  // const a = new Animated.Value(-1);
-  // const b = Animated.divide(1, a);
-
-  // Animated.spring(a, {
-  //   toValue: 1,
-  //   delay: 500,
-  // }).start();
+  const { alertNotification } = useAlert();
 
   async function handleSubmit() {
     if (!name) {
       setIsErrored(true);
-      Alert.alert('Me diz como chamar você!');
+      alertNotification({
+        title: 'Me diz como chamar você!',
+      });
       return;
     }
 
@@ -57,7 +53,10 @@ export function UserIdentification(): JSX.Element {
       } as ConfirmationParams);
       setName('');
     } catch {
-      Alert.alert('Falha ao salvar os dados!', 'Tente novamente!');
+      alertNotification({
+        title: 'Falha ao salvar os dados!',
+        message: 'Tente novamente!',
+      });
     }
   }
 

@@ -11,6 +11,7 @@ import {
   Jost_600SemiBold,
 } from '@expo-google-fonts/jost';
 
+import { AlertContextProvider } from './src/contexts/AlertContext';
 import Routes from './src/routes';
 
 import theme from './src/styles/theme';
@@ -49,18 +50,20 @@ export default function App(): JSX.Element {
   }
 
   return (
-    <SafeAreaView
-      style={{
-        backgroundColor: theme.colors.WHITE,
-        flex: 1,
-      }}
-    >
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor="transparent"
-        translucent
-      />
-      <Routes />
-    </SafeAreaView>
+    <AlertContextProvider>
+      <SafeAreaView
+        style={{
+          backgroundColor: theme.colors.WHITE,
+          flex: 1,
+        }}
+      >
+        <StatusBar
+          barStyle="dark-content"
+          backgroundColor="transparent"
+          translucent
+        />
+        <Routes />
+      </SafeAreaView>
+    </AlertContextProvider>
   );
 }

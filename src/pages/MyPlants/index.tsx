@@ -7,13 +7,14 @@ import ptBR from 'date-fns/locale/pt-BR';
 import { Header } from '../../components/Header';
 import { PlantCardSecondary } from '../../components/PlantCardSecondary';
 import { CustomModal } from '../../components/Modal';
+import { Loading } from '../../components/Loading';
+import { useAlert } from '../../contexts/AlertContext';
 
 import { PlantProps } from '../../types';
 import { loadPlant, removePlant } from '../../libs/storage';
 
 import waterdropImg from '../../assets/waterdrop.png';
 import { styles } from './styles';
-import { Loading } from '../../components/Loading';
 
 export function MyPlants(): JSX.Element {
   const [plants, setPlants] = useState<PlantProps[]>([]);
@@ -25,6 +26,8 @@ export function MyPlants(): JSX.Element {
     {} as PlantProps,
   );
 
+  const { alertNotification } = useAlert();
+
   useEffect(() => {
     async function loadStorageData() {
       const plantsStoraged = await loadPlant();
@@ -34,8 +37,6 @@ export function MyPlants(): JSX.Element {
         new Date().getTime(),
         { locale: ptBR },
       );
-
-      console.log(nextTime);
 
       setNextWatered(`Regue sua ${plantsStoraged[0].name} daqui a ${nextTime}`);
 
@@ -61,7 +62,11 @@ export function MyPlants(): JSX.Element {
 
       setShow(false);
     } catch (err) {
-      Alert.alert('Ops!', 'Não foi possível remover essa plantinha.');
+      setShow(false);
+      alertNotification({
+        title: 'Ops!',
+        message: 'Não foi possível remover essa plantinha.',
+      });
     }
   }
 
